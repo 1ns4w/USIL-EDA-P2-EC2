@@ -40,16 +40,13 @@ void recorrer4(Container &container, Function &function)
 template <typename Container>
 void print(Container &container, ostream &os)
 {
-	auto begin = container.begin();
+	auto begin = container.begin(); //Suele generar un error desconocido
 	while (begin != container.end())
 		os << *begin << endl;
 }
 
-template <typename T> //creando template - Kevin De Lama
-void incrementar(T &val) //int cambiado por T1 - Kevin De Lama
-{
-	val++;
-}
+void incrementar(T1 &val) //int cambiado por T1 - Kevin De Lama
+{ val++; }
 
 
 int main()
@@ -60,45 +57,52 @@ int main()
   	// cambio de int por T1 - Diego Panta
 	for (T1 i = 0; i < 10; i++)
 		vx.push_back(i * i);
-
+	cout<<"Se agregan valores al vector"<<endl;
+	cout<<"================="<<endl;
+	
 	// cambio de int por T1 - Diego Panta
 	vector<T1>::iterator iter1 = vx.begin();
 	for (; iter1 != vx.end(); iter1++)
 		cout << *iter1 << endl;
+	cout<<"================="<<endl;
 
 	auto iter2 = vx.begin();
 	for (; iter2 != vx.end(); iter2++)
 		cout << *iter2 << endl;
+	cout<<"================="<<endl;
 
 	for (T1 &v : vx) //int cambiado a T1 - Kevin De Lama
 		cout << v++ << endl;
+	cout<<"================="<<endl;
 
-	recorrer1(vx.begin(), vx.end(), cout);
-  cout << "Check #1\n";
-	recorrer1(vx.begin() + 2, vx.end() - 1, cout);
-  cout << "Check #2\n";
-
+	recorrer1(vx.begin(), vx.end(), cout); //funciona
+        cout << "Check #1\n";
+	recorrer1(vx.begin() + 2, vx.end() - 1, cout); //funciona
+        cout << "Check #2\n";
+	
+	print(iter1, cout)//suele dar un error en la funcion print, sobre el container
+	//A partir de aqui el codigo no no retorna valores en la terminal
 	MyOF<T1> myof;
-	recorrer2(vx.begin(), vx.end(), incrementar);
+	recorrer2(vx.begin(), vx.end(), incrementar);//no funciona, no regresa valor
   cout << "Check #3\n";
-	recorrer2(vx.begin(), vx.end(), myof);
+	recorrer2(vx.begin(), vx.end(), myof);//no funciona, no regresa valor
   cout << "Check #4\n";
 
   // Aqui agregar una funcion lambda
-  auto x=[](int &v){ cout << v <<endl; };//se volvio una variable a la lambda_MaizoDiego
-  recorrer2(vx.begin(), vx.end(),x ); 
+  auto x=[&](int &v){ cout << v <<endl; };//se volvio una variable a la lambda_MaizoDiego
+  recorrer2(vx.begin(), vx.end(),x ); //funciona retorna infinito 1
   cout << "Check #5\n";
-  auto y=[](int &v){ v+= 5; };//se volvio una variable a la lambda_MaizoDiego
-  recorrer2(vx.begin(), vx.end(), y); 
+  auto y=[](int &v){ v+= 5; return v; };//se volvio una variable a la lambda_MaizoDiego
+  recorrer2(vx.begin(), vx.end(), y); // no funciona, no regresa valor
   cout << "Check #6\n";
 
   recorrer3(vx.begin(), vx.end(), myof, cout);
-  cout << "Check #50\n";
+  cout << "Check #50\n";//funciona pero infinito, regresa valores sin un limite
 
-  recorrer4(vx, incrementar);
+  recorrer4(vx, incrementar);//no funciona, no regresa valor
   cout << "Check #60\n";
   auto z=[](int &v){ cout << v <<"\n"; };
-  recorrer4(vx, z);
+  recorrer4(vx, z);//funciona retorna infinito 1
   cout << "Check #70\n";
 	// Añadir return 0 - buena practica Diego Panta
 	return 0;
