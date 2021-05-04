@@ -45,8 +45,8 @@ void print(Container &container, ostream &os)
 		os << *begin << endl;
 }
 
-template <typename T> //creando template - Kevin De Lama
-void incrementar(T &val) //int cambiado por T1 - Kevin De Lama
+
+void incrementar(T1 &val) //int cambiado por T1 - Kevin De Lama
 {
 	val++;
 }
@@ -54,24 +54,26 @@ void incrementar(T &val) //int cambiado por T1 - Kevin De Lama
 
 int main()
 {
-	// cambio de int por T1 - Diego Panta
 	vector<T1> vx;
 
-  	// cambio de int por T1 - Diego Panta
 	for (T1 i = 0; i < 10; i++)
-		vx.push_back(i * i);
+		vx.push_back(i * i); //0.0, 1.1, 2.2, 3.3
+  cout<<"Iterador inicializado"<<endl;
 
-	// cambio de int por T1 - Diego Panta
 	vector<T1>::iterator iter1 = vx.begin();
 	for (; iter1 != vx.end(); iter1++)
 		cout << *iter1 << endl;
+  cout<<"Final del for 1 - iter 1"<<endl;
 
 	auto iter2 = vx.begin();
 	for (; iter2 != vx.end(); iter2++)
 		cout << *iter2 << endl;
-
-	for (T1 &v : vx) //int cambiado a T1 - Kevin De Lama
+  cout<<"Final del for 2 - iter 2"<<endl;
+  
+  cout<<"---------"<<endl;
+	for (T1 &v : vx) 
 		cout << v++ << endl;
+  cout<<"final del for 3 - T1 &v"<<endl;
 
 	recorrer1(vx.begin(), vx.end(), cout);
   cout << "Check #1\n";
@@ -79,16 +81,20 @@ int main()
   cout << "Check #2\n";
 
 	MyOF<T1> myof;
-	recorrer2(vx.begin(), vx.end(), incrementar);
-  cout << "Check #3\n";
-	recorrer2(vx.begin(), vx.end(), myof);
-  cout << "Check #4\n";
+  cout<<"kevin"<<endl;
 
-  // Aqui agregar una funcion lambda
-  auto x=[](int &v){ cout << v <<endl; };//se volvio una variable a la lambda_MaizoDiego
+	
+  recorrer2(vx.begin(), vx.end(), incrementar);
+  cout << "Check #3\n";
+
+	recorrer2(vx.begin(), vx.end(), myof);
+  cout << "Check #4\n"; 
+
+  auto x=[](int &v){ cout << v <<endl; };
   recorrer2(vx.begin(), vx.end(),x ); 
   cout << "Check #5\n";
-  auto y=[](int &v){ v+= 5; };//se volvio una variable a la lambda_MaizoDiego
+
+  auto y=[](int &v){ v+= 5; };
   recorrer2(vx.begin(), vx.end(), y); 
   cout << "Check #6\n";
 
@@ -97,9 +103,10 @@ int main()
 
   recorrer4(vx, incrementar);
   cout << "Check #60\n";
+
   auto z=[](int &v){ cout << v <<"\n"; };
   recorrer4(vx, z);
   cout << "Check #70\n";
-	// Añadir return 0 - buena practica Diego Panta
+
 	return 0;
 }
