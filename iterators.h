@@ -34,8 +34,8 @@ void recorrer4(Container &container, Function &function)
 		function(*begin); //eliminado extra_param_MaizoDiego
 }
 
-template <typename T> //creando template - Kevin De Lama
-void incrementar(T &val) //int cambiado por T1 - Kevin De Lama
+
+void incrementar(T1 &val) //int cambiado por T1 - Kevin De Lama
 {
 	val++;
 }
