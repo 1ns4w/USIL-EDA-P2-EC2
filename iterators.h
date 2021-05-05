@@ -2,6 +2,10 @@
 #ifndef __ITERATORS_H__
 #define __ITERATORS_H__
 
+#include <iostream>
+#include <vector>
+#include "type.h"
+
 template <typename Iterator>
 void recorrer1(Iterator begin, Iterator end, ostream &os)
 {
@@ -34,10 +38,16 @@ void recorrer4(Container &container, Function &function)
 		function(*begin); //eliminado extra_param_MaizoDiego
 }
 
-template <typename T> //creando template - Kevin De Lama
-void incrementar(T &val) //int cambiado por T1 - Kevin De Lama
+void incrementar(T &val) //int cambiado por T1 - MaizoDiego
 {
 	val++;
 }
 
+template <typename Container>
+void print(Container &container, ostream &os)
+{
+	auto begin = container.begin();
+	while (begin != container.end())
+		os << *begin << endl;
+}
 #endif // Agregado por Kevin De Lama
