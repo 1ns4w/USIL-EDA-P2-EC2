@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-//#include "linkedlist.h" eliminado Linked-MaizoDiego
+
 #include "type.h"
 #include "myof.h"
 using namespace std;
@@ -34,7 +34,7 @@ void recorrer4(Container &container, Function &function)
 {
   auto begin = container.begin();
 	while (begin != container.end())
-		function(*begin); //eliminado extra_param_MaizoDiego
+		function(*begin); 
 }
 
 template <typename Container>
@@ -45,8 +45,8 @@ void print(Container &container, ostream &os)
 		os << *begin << endl;
 }
 
-template <typename T> //creando template - Kevin De Lama
-void incrementar(T &val) //int cambiado por T1 - Kevin De Lama
+template <typename T> 
+void incrementar(T1 &val) //int cambiado por T1 -Diego Panta
 {
 	val++;
 }
@@ -60,19 +60,26 @@ int main()
   	// cambio de int por T1 - Diego Panta
 	for (T1 i = 0; i < 10; i++)
 		vx.push_back(i * i);
+	cout << "Iniciando Iterator" << endl;
 
 	// cambio de int por T1 - Diego Panta
 	vector<T1>::iterator iter1 = vx.begin();
 	for (; iter1 != vx.end(); iter1++)
 		cout << *iter1 << endl;
 
+	cout << "Final del iterator - for" << endl;
+	
 	auto iter2 = vx.begin();
 	for (; iter2 != vx.end(); iter2++)
 		cout << *iter2 << endl;
 
-	for (T1 &v : vx) //int cambiado a T1 - Kevin De Lama
+	cout << "Final del iterator2- for" << endl;
+	
+	for (T1 &v : vx)
 		cout << v++ << endl;
 
+	cout << "Final del iterator3- for" << endl;
+	
 	recorrer1(vx.begin(), vx.end(), cout);
   cout << "Check #1\n";
 	recorrer1(vx.begin() + 2, vx.end() - 1, cout);
@@ -85,10 +92,10 @@ int main()
   cout << "Check #4\n";
 
   // Aqui agregar una funcion lambda
-  auto x=[](int &v){ cout << v <<endl; };//se volvio una variable a la lambda_MaizoDiego
+  auto x=[](int &v){ cout << v <<endl; };
   recorrer2(vx.begin(), vx.end(),x ); 
   cout << "Check #5\n";
-  auto y=[](int &v){ v+= 5; };//se volvio una variable a la lambda_MaizoDiego
+  auto y=[](int &v){ v+= 5; };
   recorrer2(vx.begin(), vx.end(), y); 
   cout << "Check #6\n";
 
